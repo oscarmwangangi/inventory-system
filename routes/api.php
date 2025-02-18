@@ -1,11 +1,39 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ProductController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\StockTransferController;
+use App\Http\Controllers\StockAdjustmentController;
+use App\Http\Controllers\OrderController;
 
-Route::get('dashboard', [AdminController::class, 'getOverview']);
-Route::get('products', [ProductController::class, 'index']);
-Route::post('products', [ProductController::class, 'store']);
-Route::put('products/{id}', [ProductController::class, 'update']);
-Route::delete('products/{id}', [ProductController::class, 'destroy']);
+use App\Http\Controllers\SupplierController;
+
+Route::middleware('api')->group(function () {
+    Route::get('/categories', [CategoryController::class, 'index']);
+
+    Route::post('/categories', [CategoryController::class, 'store']);
+
+    Route::post('/products', [ProductController::class, 'store']);
+
+    Route::get('/products', [ProductController::class, 'index']);
+
+    Route::get('/stock-adjustments', [StockAdjustmentController::class, 'index']);
+    
+    Route::post('/stock-adjustments', [StockAdjustmentController::class, 'store']);
+
+    Route::get('/stock-transfers', [StockTransferController::class, 'index']);
+
+    Route::post('/stock-transfers', [StockTransferController::class, 'store']);
+
+    Route::get('/suppliers', [SupplierController::class, 'index']);
+    Route::post('/suppliers', [SupplierController::class, 'store']);
+
+   
+    Route::get('/orders', [OrderController::class, 'index']);
+    Route::post('/orders', [OrderController::class, 'store']);
+    Route::put('/orders/{id}', [OrderController::class, 'update']);
+    Route::delete('/orders/{id}', [OrderController::class, 'destroy']);
+        // Add more API routes as needed.
+});
