@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\StockTransferController;
 use App\Http\Controllers\StockAdjustmentController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
 
 use App\Http\Controllers\SupplierController;
@@ -33,7 +34,14 @@ Route::middleware('api')->group(function () {
    
     Route::get('/orders', [OrderController::class, 'index']);
     Route::post('/orders', [OrderController::class, 'store']);
+
     Route::put('/orders/{id}', [OrderController::class, 'update']);
     Route::delete('/orders/{id}', [OrderController::class, 'destroy']);
+
+   
+
+Route::get('/users', [UserController::class, 'index']);
+
         // Add more API routes as needed.
+
 });
